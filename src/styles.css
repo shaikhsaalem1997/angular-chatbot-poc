@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+body
+{
+    background-image: url('crop_2.jpg');
+    /* background-image: url('D:/Haji_bhai/Angular/chatbot_demo/crop_2.jpg'); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+    padding-right: 20px;
+}
+
+@media(max-width: 825px) {
+    body {
+        background-image: url('robot_1.jpg');
+        /* background-image: url('D:/Haji_bhai/Angular/chatbot_demo/robot_1.jpg'); */
+    }
+  }

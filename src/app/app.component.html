@@ -1,0 +1,49 @@
+<div style="width: 100%;">
+  <div class="container" style="margin: auto; text-align: center;">
+    <div style="padding-bottom: 5%; padding-top: 10px;">
+    <p class="justify-content-center" *ngIf="href === 'Home' || href === '/kernel'"
+      style="font-size: 5vw; font-weight: bold;">
+      <i class="fas fa-robot"></i> KernelSphere Chatbot <i class="fas fa-robot"></i>
+    </p>
+    <p class="justify-content-center" *ngIf="href === '/neo'"
+      style="font-size: 5vw; font-weight: bold;">
+      <i class="fas fa-robot"></i> Neomoment Chatbot <i class="fas fa-robot"></i>
+    </p>
+    <p class="justify-content-center" style="font-size: 3vw;">
+      Languages supported : English & Arabic
+    </p>
+    <br>
+
+    <div style="text-align: center;">
+      <!-- <h5>What do you want to do ?</h5> -->
+      <h5> Chatbot type :</h5>
+
+      <select name="my-select" [(ngModel)]="mySelect" (change)="selectChange()">
+          <option [value]="item.id" *ngFor="let item of data">
+              {{item.name}}
+          </option>
+      </select>
+      <br><br>
+    </div>
+    <div style="text-align: center;"></div>
+    <nav>
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="href === 'Home' || href === '/kernel'">
+          <button class="btn btn-primary" Button>Ask KernelSphere Chatbot</button>
+      </li>
+      <li class="nav-item" *ngIf="href === '/neo'">
+        <button class="btn btn-primary" Button>Ask Neomoment Chatbot</button>
+      </li>
+
+    </ul>
+    </nav>
+    </div>
+    <div style="padding-top: 25px;">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+
+
+</div>
