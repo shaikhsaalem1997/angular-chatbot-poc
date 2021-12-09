@@ -25,8 +25,8 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
-
+        working-directory: .
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -53,4 +53,4 @@ jobs:
           app-name: 'angular-chatbot-poc'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_60D55A64BD2F496DBB87C4FA50DDABB2 }}
-          package: .
+          package: ./dist/angularCB
