@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ChatService } from 'src/app/chat.service';
 
 declare var webkitSpeechRecognition: any;
-declare function getMicStatus(): boolean; 
 
 @Injectable({
   providedIn: 'root'
@@ -43,9 +42,6 @@ export class VoicerecognitionService {
   }
 
   start() {
-
-    var checkM = getMicStatus();
-    console.log("checkinggggggggggggggggggg" + checkM)
 
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
