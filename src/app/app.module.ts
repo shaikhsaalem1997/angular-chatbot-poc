@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ChatService } from './chat.service';
 import { VoicerecognitionService } from './voicerecognition.service';
-import { KernelComponent } from './kernel/kernel.component';
+import { ConfigComponent } from './config/config.component';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { KernelComponent } from './kernel/kernel.component';
     AppComponent,
     ChatEngComponent,
     SpeechToTextComponent,
-    KernelComponent
+    ConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { KernelComponent } from './kernel/kernel.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ChatService, VoicerecognitionService],
+  providers: [ChatService, VoicerecognitionService, ConfigComponent, ChatEngComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
