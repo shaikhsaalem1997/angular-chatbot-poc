@@ -14,7 +14,7 @@ export class ChatEngComponent implements OnInit, AfterViewChecked {
     messages?: Observable<Message[]>;
     formValue!: string;
     sessionVal!: string;
-    countVal = 0;
+    public countVal = 0;
 
   constructor(public chat: ChatService) { }
 
@@ -42,29 +42,32 @@ export class ChatEngComponent implements OnInit, AfterViewChecked {
 
     // this.chat.converse(this.formValue);
     // console.log('formVal ===', this.formValue);
-
-    if (this.countVal == 0) {
-      this.sessionVal = "";
-      this.countVal++;
-    };
-
-    var cht = {text: this.formValue,
-      session_val: this.sessionVal};
-
-    this.chat.sendMessage(cht).subscribe(res => console.log('entered value ==', res))
-    
-    if (this.countVal == 1) {
-      this.chat.sendMessage(cht).subscribe(res => { console.log('response ====', res);
-      let myObj = JSON.parse(JSON.stringify(res));
-
-      this.sessionVal = myObj.session;
-      this.countVal++;
+    if (this.formValue.replace(/\s/g, "") != "") {
       
-      }); 
+      if (this.countVal == 0) {
+        this.sessionVal = "";
+        this.countVal++;
+      };
+
+      var cht = {text: this.formValue,
+        session_val: this.sessionVal};
+
+      this.chat.sendMessage(cht).subscribe(res => console.log('entered value ==', res))
+      
+      if (this.countVal == 1) {
+        this.chat.sendMessage(cht).subscribe(res => { console.log('response ====', res);
+        let myObj = JSON.parse(JSON.stringify(res));
+
+        this.sessionVal = myObj.session;
+        this.countVal++;
+        
+        }); 
+      }
+      
+      this.chat.converse(cht, false, "null");
+      this.formValue = "";
     }
-    
-    this.chat.converse(cht, false, "null");
-    this.formValue = "";
+
   }
 
 }
