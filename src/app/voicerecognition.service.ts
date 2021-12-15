@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChatService } from 'src/app/chat.service';
+import { ChatEngComponent } from './chat-eng/chat-eng.component';
 
 declare var webkitSpeechRecognition: any;
 
@@ -21,7 +22,7 @@ export class VoicerecognitionService {
   voiceOf!: string;
   // result!: any;
 
-  constructor(private chat: ChatService) { }
+  constructor(private chat: ChatService, public eng: ChatEngComponent) { }
 
   init() {
 
@@ -68,38 +69,48 @@ export class VoicerecognitionService {
     this.text = this.text + ' ' + this.tempWords;
     this.tempWords = '';
 
-    if (this.countVal == 0) {
-      this.sessionVal = "";
-      this.countVal++;
-    };
+    if (this.text.replace(/\s/g, "") != "") {
 
-    // this.sessionVal = "";
-    var cht = {text: this.text,
-              session_val: this.sessionVal};
-    // this.chat.sendMessage(cht).subscribe(res => console.log('entered value ==', res))
-    if (this.countVal == 1) {
-      this.chat.sendMessage(cht).subscribe(res => { console.log('response ====', res);
-      let myObj = JSON.parse(JSON.stringify(res));
+      // if (this.countVal == 0) {
+      if (this.eng.countVal == 0) {
+        this.eng.sessionVal = "";
+        // this.sessionVal = "";
+        // this.countVal++;
+        this.eng.countVal++;
+      };
 
-      this.sessionVal = myObj.session;
-      this.countVal++;
+
+
+      // this.sessionVal = "";
+      var cht = {text: this.text,
+                session_val: this.eng.sessionVal};
+      // this.chat.sendMessage(cht).subscribe(res => console.log('entered value ==', res))
+      // if (this.countVal == 1) {
+      if (this.eng.countVal == 1) {
+        this.chat.sendMessage(cht).subscribe(res => { console.log('response ====', res);
+        let myObj = JSON.parse(JSON.stringify(res));
+
+        this.eng.sessionVal = myObj.session;
+        // this.countVal++;
+        this.eng.countVal++;
+        
+        }); 
+      } 
+
+      if (this.recognition.lang == 'en-US') {
+        this.voiceOf = "US English Female";
+        console.log('EnglishEnglishEnglishEnglish');
+      };
+      if (this.recognition.lang == 'ar-AE') {
+        this.voiceOf = "Arabic Female";
+        console.log('ArabicArabicArabicArabic');
+      };
+
+
+      this.chat.converse(cht, true, this.voiceOf);
+      this.text = "";
       
-      }); 
-    } 
-
-    if (this.recognition.lang == 'en-US') {
-      this.voiceOf = "US English Female";
-      console.log('EnglishEnglishEnglishEnglish');
-    };
-    if (this.recognition.lang == 'ar-AE') {
-      this.voiceOf = "Arabic Female";
-      console.log('ArabicArabicArabicArabic');
-    };
-
-
-    this.chat.converse(cht, true, this.voiceOf);
-    this.text = "";
-    
-    // this.formValue = "";
+      // this.formValue = "";
+    }
   }
 }
