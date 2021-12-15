@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 })
 export class AppComponent implements OnInit{
   public href: string = "";
+  public chatbot_name: string = "";
 
   mySelect = '1';
   selectedValue: any;
@@ -36,6 +37,11 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
+  }
+
+  changeName() {
+    console.log('formVal ===', this.chatbot_name);
+    this.router.navigate(['']);
   }
 
   selectChange() {
